@@ -1,0 +1,37 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy Homepage (ameh.vudse26.cloud)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 159.198.47.177
+          username: ameh_ftpdeploy
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./
+          server-dir: /public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .github/**
+
+      - name: Verify deployment
+        run: |
+          echo "## Homepage Deployed 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "| Site | https://ameh.vudse26.cloud |" >> $GITHUB_STEP_SUMMARY
+          echo "| Time | $(date -u) |" >> $GITHUB_STEP_SUMMARY

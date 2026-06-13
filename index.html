@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ameh Boniface Omonu — SEN 482</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f; --surface: #13131a; --border: #1e1e2e;
+      --accent: #7c6af7; --accent2: #2ecc71; --text: #e8e8f0;
+      --muted: #6b6b80; --card: #16161f;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; min-height: 100vh; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(124,106,247,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(124,106,247,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; }
+    .glow { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,106,247,0.12) 0%, transparent 70%); border-radius: 50%; top: -200px; left: -200px; pointer-events: none; z-index: 0; animation: float 8s ease-in-out infinite; }
+    .glow2 { position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(46,204,113,0.08) 0%, transparent 70%); border-radius: 50%; bottom: -100px; right: -100px; pointer-events: none; z-index: 0; animation: float 10s ease-in-out infinite reverse; }
+    @keyframes float { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(30px,30px); } }
+    .wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    nav { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 24px; max-width: 860px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--accent); letter-spacing: 0.05em; }
+    .nav-tag { font-size: 0.78rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; font-family: 'Space Mono', monospace; }
+    .hero { padding: 80px 0 60px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--accent2); font-family: 'Space Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 24px; }
+    .hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
+    .hero h1 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px; }
+    .hero h1 span { background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 40px; }
+    .info-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 60px; }
+    .info-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; transition: border-color 0.2s; }
+    .info-card:hover { border-color: rgba(124,106,247,0.4); }
+    .info-label { font-size: 0.7rem; color: var(--muted); font-family: 'Space Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .info-value { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .divider { height: 1px; background: var(--border); margin-bottom: 60px; }
+    .section-label { font-size: 0.72rem; font-family: 'Space Mono', monospace; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 28px; }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; position: relative; overflow: hidden; transition: border-color 0.25s, transform 0.25s; margin-bottom: 60px; }
+    .project-card:hover { border-color: rgba(124,106,247,0.5); transform: translateY(-3px); }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+    .project-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; }
+    .project-badge { font-size: 0.72rem; font-family: 'Space Mono', monospace; background: rgba(46,204,113,0.1); color: var(--accent2); border: 1px solid rgba(46,204,113,0.25); padding: 4px 12px; border-radius: 20px; }
+    .project-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px; }
+    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 28px; }
+    .feature { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text); }
+    .feature-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .tag { font-size: 0.75rem; font-family: 'Space Mono', monospace; background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 4px 12px; border-radius: 6px; }
+    .btn-launch { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--accent) 0%, #9d8df5 100%); color: white; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.95rem; padding: 14px 28px; border-radius: 10px; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .btn-launch:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-arrow { transition: transform 0.2s; }
+    .btn-launch:hover .btn-arrow { transform: translateX(4px); }
+    .cicd-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 60px; }
+    .cicd-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .cicd-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+    .pipeline { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .pipe-step { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; font-size: 0.82rem; font-weight: 500; }
+    .pipe-arrow { color: var(--muted); font-size: 1rem; }
+    .pipe-step.active { border-color: rgba(46,204,113,0.4); background: rgba(46,204,113,0.06); color: var(--accent2); }
+    footer { border-top: 1px solid var(--border); padding: 28px 0; position: relative; z-index: 1; }
+    .footer-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-text { font-size: 0.78rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+    .footer-live { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--accent2); font-family: 'Space Mono', monospace; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    @media (max-width: 600px) { .info-row { grid-template-columns: 1fr; } .features { grid-template-columns: 1fr; } .pipeline { flex-direction: column; align-items: flex-start; } .hero h1 { font-size: 2.2rem; } }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="glow2"></div>
+  <nav>
+    <span class="nav-logo">ameh.vudse26.cloud</span>
+    <span class="nav-tag">SEN 482 — CI/CD</span>
+  </nav>
+  <div class="wrapper">
+    <section class="hero">
+      <div class="hero-eyebrow">Software Engineering · Veritas University</div>
+      <h1>Ameh<br><span>Boniface Omonu</span></h1>
+      <p class="hero-sub">Final-year Software Engineering student building real-world projects with modern DevOps practices — automated pipelines, cloud deployment, and continuous delivery.</p>
+      <div class="info-row">
+        <div class="info-card"><div class="info-label">Matric Number</div><div class="info-value">VUG/SEN/22/7648</div></div>
+        <div class="info-card"><div class="info-label">Course</div><div class="info-value">SEN 482 — CI/CD</div></div>
+        <div class="info-card"><div class="info-label">Institution</div><div class="info-value">Veritas University, Abuja</div></div>
+      </div>
+    </section>
+    <div class="divider"></div>
+    <div class="section-label">// Featured Project</div>
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">VUNA Calculator</div>
+        <span class="project-badge">● Live</span>
+      </div>
+      <p class="project-desc">A web calculator with a unique Lagos Cost Estimator feature — fetches a live USD/NGN exchange rate, lets you price a shopping list in Naira, converts the total to USD, and sends it directly into the calculator for further computation.</p>
+      <div class="features">
+        <div class="feature"><span class="feature-dot"></span>Basic arithmetic operations</div>
+        <div class="feature"><span class="feature-dot"></span>Live USD/NGN rate via API</div>
+        <div class="feature"><span class="feature-dot"></span>Lagos Cost Estimator</div>
+        <div class="feature"><span class="feature-dot"></span>Dark / Light mode toggle</div>
+      </div>
+      <div class="stack">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Bootstrap</span>
+        <span class="tag">Frankfurter API</span>
+        <span class="tag">GitHub Actions</span>
+        <span class="tag">CyberPanel FTP</span>
+      </div>
+      <a href="./calc/" class="btn-launch">Launch Calculator <span class="btn-arrow">→</span></a>
+    </div>
+    <div class="section-label">// CI/CD Pipeline</div>
+    <div class="cicd-card">
+      <div class="cicd-title">Automated Deployment Pipeline</div>
+      <p class="cicd-sub">Every push to the <code style="background:var(--surface);padding:2px 6px;border-radius:4px;font-size:0.85em;">main</code> branch on GitHub triggers an automated workflow that deploys the latest code directly to the live server via FTP — no manual uploads needed.</p>
+      <div class="pipeline">
+        <div class="pipe-step">✏️ Code Change</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-step">⬆️ Git Push</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-step">⚙️ GitHub Actions</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-step">📦 FTP Deploy</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-step active">🌐 Live Site</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-text">© 2026 · Ameh Boniface Omonu · VUG/SEN/22/7648</span>
+      <span class="footer-live"><span class="live-dot"></span> Auto-deployed via GitHub Actions</span>
+    </div>
+  </footer>
+</body>
+</html>
