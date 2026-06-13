@@ -14,6 +14,19 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: dr33xx/vuna-home:latest
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -29,9 +42,13 @@ jobs:
             **/.git*/**
             **/node_modules/**
             .github/**
+            Dockerfile
+            $GITHUB_STEP_SUMMARY
 
       - name: Verify deployment
         run: |
           echo "## Homepage Deployed 🚀" >> $GITHUB_STEP_SUMMARY
           echo "| Site | https://ameh.vudse26.cloud |" >> $GITHUB_STEP_SUMMARY
+          echo "| Docker Image | dr33xx/vuna-home:latest |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit | ${{ github.sha }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Time | $(date -u) |" >> $GITHUB_STEP_SUMMARY
